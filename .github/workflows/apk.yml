@@ -21,9 +21,9 @@ jobs:
         run: |
           OWNER=$(echo "${{ github.repository_owner }}" | tr A-Z a-z)
           npm init -y
-          npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
-          npx cap init "My Wealth" com.mywealth.app --web-dir www
-          PAGE="https://$OWNER.github.io/${{ github.event.repository.name }}/" node -e "const fs=require('fs'),f='capacitor.config.json',c=JSON.parse(fs.readFileSync(f));c.server={url:process.env.PAGE,androidScheme:'https'};fs.writeFileSync(f,JSON.stringify(c,null,2))"
+          npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6 @capacitor/status-bar@6
+          npx cap init "Inv Tracker" com.mywealth.app --web-dir www
+          PAGE="https://$OWNER.github.io/${{ github.event.repository.name }}/" node -e "const fs=require('fs'),f='capacitor.config.json',c=JSON.parse(fs.readFileSync(f));c.server={url:process.env.PAGE,androidScheme:'https'};c.backgroundColor='#08060f';c.plugins={StatusBar:{style:'DARK',backgroundColor:'#08060f',overlaysWebContent:false}};fs.writeFileSync(f,JSON.stringify(c,null,2))"
           npx cap add android
           npx cap sync android
       - name: App icon
@@ -31,6 +31,11 @@ jobs:
           R=android/app/src/main/res
           rm -rf $R/mipmap-anydpi-v26
           for p in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do d=${p%%:*}; z=${p##*:}; for n in ic_launcher ic_launcher_round ic_launcher_foreground; do cp ic_$z.png $R/mipmap-$d/$n.png; done; done
+      - name: Status bar color
+        run: |
+          F=android/app/src/main/res/values/styles.xml
+          sed -i 's#</style>#    <item name="android:statusBarColor">\#08060f</item>\n    <item name="android:navigationBarColor">\#08060f</item>\n</style>#' $F
+          cat $F | head -30
       - name: Build
         run: |
           cd android
