@@ -1,4 +1,4 @@
-# My Wealth: put it online and build the Android app
+# Inv Tracker: put it online and build the Android app
 
 All files are in one flat folder so they upload easily from a phone.
 
@@ -16,3 +16,7 @@ Notes
 - The APK opens your hosted page, so page changes appear without rebuilding. It needs internet.
 - Typed NAVs are saved inside the app on that phone.
 - If Update NAV prints "price not found", Al Meezan changed its site layout. Tell Claude.
+
+Updating later
+- To change the page: Add file > Upload files, upload the new index.html (same name replaces it). The installed app shows it on next open. No rebuild needed.
+- To change the icon or status bar color: upload the new files, then Actions > Build APK > Run workflow, and install the new APK. Uninstall the old app first, because each build is signed with a different debug key.
