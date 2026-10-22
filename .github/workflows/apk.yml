@@ -29,8 +29,16 @@ jobs:
       - name: App icon
         run: |
           R=android/app/src/main/res
-          rm -rf $R/mipmap-anydpi-v26
-          for p in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do d=${p%%:*}; z=${p##*:}; for n in ic_launcher ic_launcher_round ic_launcher_foreground; do cp ic_$z.png $R/mipmap-$d/$n.png; done; done
+          for p in mdpi:48:108 hdpi:72:162 xhdpi:96:216 xxhdpi:144:324 xxxhdpi:192:432; do
+            IFS=: read d a f <<< "$p"
+            cp ic_$a.png $R/mipmap-$d/ic_launcher.png
+            cp ic_$a.png $R/mipmap-$d/ic_launcher_round.png
+            cp fg_$f.png $R/mipmap-$d/ic_launcher_foreground.png
+          done
+          mkdir -p $R/mipmap-anydpi-v26
+          printf '<?xml version="1.0" encoding="utf-8"?>\n<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">\n  <background android:drawable="@color/ic_launcher_background"/>\n  <foreground android:drawable="@mipmap/ic_launcher_foreground"/>\n</adaptive-icon>\n' > $R/mipmap-anydpi-v26/ic_launcher.xml
+          cp $R/mipmap-anydpi-v26/ic_launcher.xml $R/mipmap-anydpi-v26/ic_launcher_round.xml
+          printf '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n  <color name="ic_launcher_background">#1a0f3d</color>\n</resources>\n' > $R/values/ic_launcher_background.xml
       - name: Status bar color
         run: |
           F=android/app/src/main/res/values/styles.xml
