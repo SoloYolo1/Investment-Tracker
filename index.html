@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>My Wealth</title>
-<meta name="theme-color" content="#08060f"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url%28%23g%29'/%3E%3Cpath d='M14 45l11-11 8 6 17-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='20' r='4.5' fill='%23fff'/%3E%3Crect x='14' y='50' width='36' height='3' rx='1.5' fill='%23fff' opacity='.45'/%3E%3C/svg%3E"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+<title>Inv Tracker</title>
+<meta name="theme-color" content="#08060f"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232a1560'/%3E%3Cstop offset='1' stop-color='%2307050f'/%3E%3C/linearGradient%3E%3ClinearGradient id='l' gradientUnits='userSpaceOnUse' x1='12' y1='0' x2='52' y2='0'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%2334d399'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url%28%23b%29'/%3E%3Cpolyline points='13%2C22 23%2C44 32%2C29 41%2C44 51%2C17' fill='none' stroke='url%28%23l%29' stroke-width='5.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='51' cy='17' r='4' fill='%23fff'/%3E%3C/svg%3E"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -47,7 +47,7 @@ input[type=range]{width:100%;accent-color:var(--a);margin:2px 0 12px;height:26px
 details{margin-top:8px}summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--mu);padding:6px 0}
 .hr{display:grid;grid-template-columns:1fr 1fr 1fr 30px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd);font:600 13px var(--fn)}.x{background:none;border:0;color:var(--mu);padding:4px}.ic svg{display:block}.chip svg{display:block}.btn.sec{background:var(--tr);color:var(--tx);box-shadow:none;border:1px solid var(--bd)}@keyframes sp{to{transform:rotate(360deg)}}.spin svg{animation:sp .8s linear infinite}
 </style></head><body><div class="bl b1"></div><div class="bl b2"></div><div class="w">
-<div class="top"><div><b>My Wealth</b><small id="fund">Meezan Balanced Fund</small></div><div style="display:flex;gap:8px"><div class="chip" id="nav">–</div><button class="chip" id="rf" aria-label="Refresh" style="color:inherit"></button><button class="chip" id="th" style="color:inherit"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor"/></svg></button></div></div>
+<div class="top"><div><b>Inv Tracker</b><small id="fund">Meezan Balanced Fund</small></div><div style="display:flex;gap:8px"><div class="chip" id="nav">–</div><button class="chip" id="rf" aria-label="Refresh" style="color:inherit"></button><button class="chip" id="th" style="color:inherit"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor"/></svg></button></div></div>
 <div class="cd hero" style="--i:1"><div class="l" id="lbl">Portfolio value</div><div class="big" id="val">–</div><span class="dl up" id="dl">–</span>
 <div class="seg" id="seg"><i id="pill"></i><button data-d="1">1D</button><button data-d="7">1W</button><button data-d="30">1M</button><button data-d="0" class="on">All</button></div>
 <div id="ch"></div></div>
@@ -69,7 +69,7 @@ details{margin-top:8px}summary{cursor:pointer;font-weight:700;font-size:13px;col
 <div class="res"><div class="k">You’d have about</div><div class="v" id="pj"></div><div class="k" id="pk"></div></div></div>
 <div class="f">Price moves only · not financial advice · updated on request</div></div>
 <script>
-let NAVS=[{date:'2026-10-13',nav:26.7116},{date:'2026-10-14',nav:26.79},{date:'2026-10-15',nav:26.87},{date:'2026-10-16',nav:26.86},{date:'2026-10-19',nav:26.83},{date:'2026-10-20',nav:26.75}];
+let NAVS=[{date:'2026-10-13',nav:26.7116},{date:'2026-10-14',nav:26.79},{date:'2026-10-15',nav:26.87},{date:'2026-10-16',nav:26.86},{date:'2026-10-19',nav:26.83},{date:'2026-10-20',nav:26.75},{date:'2026-10-21',nav:26.785},{date:'2026-10-22',nav:26.6}];
 let BUYS=[{date:'2026-10-13',sent:200000,units:7360.42}];
 let PEERS={asof:'14 Oct',items:[{n:'Money Market',v:10.01},{n:'Conservative FoF',v:0.3},{n:'Moderate FoF',v:-2.72},{n:'Gold',v:-3.07},{me:true,n:'Balanced (you)',v:-3.43},{n:'Aggressive FoF',v:-5},{n:'Equity',v:-8.05}]};
 const IP={trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',up:'<path d="M7 17L17 7"/><path d="M8 7h9v9"/>',wallet:'<path d="M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M3 7l12-3v3"/><circle cx="17" cy="13.5" r="1"/>',tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1"/>',flame:'<path d="M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',snow:'<path d="M12 2v20M4 6l16 12M20 6L4 18"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',scale:'<path d="M12 3v18M5 7h14M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0z"/>',compass:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',plus:'<path d="M12 5v14M5 12h14"/>',trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',refresh:'<path d="M20 11a8 8 0 00-14-4M4 4v4h4M4 13a8 8 0 0014 4M20 20v-4h-4"/>'};
@@ -114,17 +114,18 @@ const PL=['First Rs 2 lakh invested','Add Rs 1 lakh','Add another Rs 1 lakh','St
 function plan(){$('pb').style.width=Math.max(4,done.reduce((a,b)=>a+b,0)/4*100)+'%';$('plan').innerHTML=PL.map((t,i)=>'<div class="pl'+(done[i]?' dn2':'')+'" data-i="'+i+'"><div class="ck'+(done[i]?' on':'')+'">'+(done[i]?ic('check',14):'')+'</div><span>'+esc(t)+'</span></div>').join('')}
 function ld(k,d){try{const j=JSON.parse(localStorage.getItem(k));return Array.isArray(j)&&j.length?j:d}catch(e){return d}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function mergeN(rows){const m={};NAVS.forEach(x=>m[x.date]=x);rows.forEach(x=>{if(x&&x.date&&+x.nav>0)m[x.date]={date:x.date,nav:+x.nav}});NAVS=Object.values(m).sort((a,b)=>a.date<b.date?-1:1);sv('mw_navs',NAVS)}
+let DEL=[],liveState='';
+function mergeN(rows){const m={};NAVS.forEach(x=>m[x.date]=x);rows.forEach(x=>{if(x&&x.date&&+x.nav>0&&!DEL.includes(x.date))m[x.date]={date:x.date,nav:+x.nav}});NAVS=Object.values(m).sort((a,b)=>a.date<b.date?-1:1);sv('mw_navs',NAVS)}
 function hist(){const r=[...R].reverse(),a=r[0],b=r[1];$('lt').textContent=a?('Latest '+a.nav.toFixed(4)+' on '+dd(a.date)+(b?' · Previous '+b.nav.toFixed(4)+' · '+pc((a.nav/b.nav-1)*100):'')):'';
 $('hs').innerHTML=r.slice(0,12).map(x=>'<div class="hr"><span>'+esc(dd(x.date))+'</span><span>'+x.nav.toFixed(4)+'</span><span class="'+cl(x.chg)+'">'+sg(x.chg)+'</span><button class="x" data-d="'+esc(x.date)+'" aria-label="Delete">'+ic('trash',15)+'</button></div>').join('')}
 function pull(){if(typeof fetch!=='function')return Promise.resolve();return fetch('data.json?'+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.navs&&d.navs.length){mergeN(d.navs);if(d.peers&&d.peers.items)PEERS=d.peers;render()}}).catch(()=>{})}
-function init(){const sn=ld('mw_navs',null);if(sn)NAVS=sn;else sv('mw_navs',NAVS);const sb=ld('mw_buys',null);if(sb)BUYS=sb;else sv('mw_buys',BUYS);
+function init(){DEL=ld('mw_del',[]);const m0={};NAVS.forEach(x=>m0[x.date]=x);ld('mw_navs',[]).forEach(x=>{if(x&&x.date&&+x.nav>0)m0[x.date]={date:x.date,nav:+x.nav}});NAVS=Object.values(m0).filter(x=>!DEL.includes(x.date)).sort((a,b)=>a.date<b.date?-1:1);sv('mw_navs',NAVS);const sb=ld('mw_buys',null);if(sb)BUYS=sb;else sv('mw_buys',BUYS);
 const td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);$('nd').value=td;$('bd').value=td;$('na').innerHTML=ic('plus',16)+'Save NAV';$('ba').innerHTML=ic('plus',16)+'Add';
-$('na').onclick=()=>{const d=$('nd').value,v=parseFloat($('nn').value);if(!d||!(v>0)){$('nm').textContent='Enter a date and a NAV.';return}mergeN([{date:d,nav:v}]);$('nn').value='';$('nm').textContent='Saved for '+dd(d)+'.';render()};
+$('na').onclick=()=>{const d=$('nd').value,v=parseFloat($('nn').value);if(!d||!(v>0)){$('nm').textContent='Enter a date and a NAV.';return}DEL=DEL.filter(x=>x!==d);sv('mw_del',DEL);mergeN([{date:d,nav:v}]);$('nn').value='';$('nm').textContent='Saved for '+dd(d)+'.';render()};
 $('ba').onclick=()=>{const d=$('bd').value,a=parseFloat($('bs').value),u=parseFloat($('bu').value);if(!d||!(a>0)||!(u>0)){$('nm').textContent='Enter date, amount and units.';return}BUYS.push({date:d,sent:a,units:u});sv('mw_buys',BUYS);$('bs').value='';$('bu').value='';$('nm').textContent='Investment added.';render()};
-$('hs').onclick=e=>{const b=e.target.closest('button');if(!b)return;NAVS=NAVS.filter(x=>x.date!==b.dataset.d);sv('mw_navs',NAVS);if(NAVS.length)render()};
+$('hs').onclick=e=>{const b=e.target.closest('button');if(!b)return;DEL.push(b.dataset.d);sv('mw_del',DEL);NAVS=NAVS.filter(x=>x.date!==b.dataset.d);sv('mw_navs',NAVS);if(NAVS.length)render()};
 $('rf').innerHTML=ic('refresh',16);$('rf2').innerHTML=ic('refresh',16)+'Refresh from server';
-const rfa=async()=>{const a=[$('rf'),$('rf2')];a.forEach(x=>x.classList.add('spin'));$('nm').textContent='Refreshing…';const before=NAVS.length;try{await Promise.all([pull(),live()])}catch(e){}a.forEach(x=>x.classList.remove('spin'));$('nm').textContent='Checked at '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+(NAVS.length>before?' · new price added':' · no new price yet')};
+const rfa=async()=>{const a=[$('rf'),$('rf2')];a.forEach(x=>x.classList.add('spin'));$('nm').textContent='Refreshing…';const before=NAVS.length;try{await Promise.all([pull(),live()])}catch(e){}a.forEach(x=>x.classList.remove('spin'));$('nm').textContent='Checked at '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+(NAVS.length>before?' · new price added':' · no new price yet')+(liveState?' · '+liveState:'')};
 $('rf').onclick=rfa;$('rf2').onclick=rfa;pull();setInterval(pull,300000);['s1','s2','s3'].forEach(i=>$(i).oninput=proj);
 $('th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'};
 $('plan').onclick=e=>{const r=e.target.closest('.pl');if(!r)return;const i=+r.dataset.i;done[i]=done[i]?0:1;try{localStorage.setItem('plan3',JSON.stringify(done))}catch(x){}plan()};
@@ -141,17 +142,17 @@ const mp=[['Meezan Cash Fund','Money Market'],['MFPF-CONSERVATIVE ALLOCATION PLA
 const items=mp.map(m=>{const r=rows[m[0]],v=r?parseFloat(r[8]):NaN;return isNaN(v)?null:{n:m[1],v,me:!!m[2]}}).filter(Boolean);return{date,nav,items}}
 let busy=false;
 async function live(){if(busy)return;busy=true;const ch=$('nav');let mcp=null;try{mcp=await claude.use('mcp')}catch(e){}
-if(!mcp){busy=false;return}
+if(!mcp){busy=false;liveState='Gmail update not available here';return}
 try{ch.textContent='Updating…';
 const q='from:newsletters@almeezangroup.com subject:"Fund Prices and Performance" newer_than:14d';
 const dat=r=>r.payload||r.structuredContent||JSON.parse((r.content.find(c=>c.type==='text')||{}).text||'{}');
 const sr=dat(await mcp.callTool('Gmail','search_threads',{query:q,pageSize:14})),ids=[];
 (sr.threads||[]).forEach(t=>(t.messages||[]).forEach(m=>{if(/^Fund Prices and Performance/.test(m.subject||''))ids.push(m.id)}));
 const got=[];for(const id of ids.slice(0,10)){const m=dat(await mcp.callTool('Gmail','get_message',{messageId:id,messageFormat:'PLAIN_TEXT'})),p=parse(m.plaintextBody||'');if(p)got.push(p)}
-if(!got.length){ch.textContent='No price emails found';busy=false;return}
+if(!got.length){ch.textContent='NAV '+R[R.length-1].nav.toFixed(2)+' · '+dd(R[R.length-1].date);liveState='no price emails found';busy=false;return}
 got.sort((a,b)=>a.date<b.date?-1:1);mergeN(got.map(p=>({date:p.date,nav:p.nav})));
 const last=got[got.length-1];if(last.items.length>3)PEERS={asof:dd(last.date),items:last.items.sort((a,b)=>b.v-a.v)};
-render();$('nav').textContent=$('nav').textContent+' · live'}catch(e){ch.textContent='Live: '+String((e&&(e.code||e.message))||e).slice(0,40)}busy=false}
+render();liveState='Gmail connected';$('nav').textContent=$('nav').textContent+' · live'}catch(e){ch.textContent='Live: '+String((e&&(e.code||e.message))||e).slice(0,40)}busy=false}
 $('nav').style.cursor='pointer';$('nav').onclick=live;live();
 init();
 </script></body></html>

@@ -1,6 +1,6 @@
 {
- "name": "My Wealth",
- "short_name": "My Wealth",
+ "name": "Inv Tracker",
+ "short_name": "Inv Tracker",
  "start_url": ".",
  "display": "standalone",
  "background_color": "#08060f",
