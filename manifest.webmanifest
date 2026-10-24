@@ -1,10 +1,10 @@
 {
- "name": "Inv Tracker",
- "short_name": "Inv Tracker",
+ "name": "Nivo",
+ "short_name": "Nivo",
  "start_url": ".",
  "display": "standalone",
- "background_color": "#08060f",
- "theme_color": "#08060f",
+ "background_color": "#131318",
+ "theme_color": "#131318",
  "icons": [
   {
    "src": "icon-192.png",

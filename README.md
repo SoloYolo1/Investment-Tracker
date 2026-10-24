@@ -1,22 +1,32 @@
-# Inv Tracker: put it online and build the Android app
+# Nivo: online page, Android app, daily notification
 
-All files are in one flat folder so they upload easily from a phone.
+All files are in one flat folder so they upload from a phone.
 
-1. Create a free GitHub account, then a new PUBLIC repository named my-wealth.
-2. Add file > Upload files. Upload every file here EXCEPT update.yml and apk.yml. Commit.
-3. Add file > Create new file. In the name box type: .github/workflows/update.yml
-   Paste the full text of update.yml from this folder. Commit.
-4. Do the same with the name .github/workflows/apk.yml and the text of apk.yml.
-5. Settings > Pages > Source: Deploy from a branch > main > / (root) > Save. After a minute your link is https://YOURNAME.github.io/my-wealth/
-6. Settings > Actions > General > Workflow permissions > Read and write > Save.
-7. Actions tab > Update NAV > Run workflow. Then check data.json for a new line.
-8. Actions tab > Build APK > Run workflow. Wait about 5 to 10 minutes. Open the finished run and download my-wealth-apk at the bottom. Unzip it, install app-debug.apk on your phone (allow installs from this source).
+A. Put it online
+1. Create a free GitHub account and a PUBLIC repository named my-wealth.
+2. Add file > Upload files. Upload everything here EXCEPT apk.yml and update.yml. Commit.
+3. Settings > Pages > Deploy from a branch > main > / (root) > Save. Your link: https://YOURNAME.github.io/my-wealth/
+4. Settings > Actions > General > Workflow permissions > Read and write > Save.
 
-Notes
-- The APK opens your hosted page, so page changes appear without rebuilding. It needs internet.
-- Typed NAVs are saved inside the app on that phone.
-- If Update NAV prints "price not found", Al Meezan changed its site layout. Tell Claude.
+B. Automatic price check and notification
+1. Add file > Create new file. Name: .github/workflows/update.yml  Paste the text of update.yml. Commit.
+2. On your phone install the free ntfy app (Play Store or F-Droid). Tap +, Subscribe to topic, and type a long private name such as inv-k7x2q9m4p1 . Remember it.
+3. GitHub: Settings > Secrets and variables > Actions > New repository secret. Name: NTFY_TOPIC  Value: the same topic name. Save.
+4. Actions > Update NAV > Run workflow. It checks Al Meezan every 10 minutes on weekday evenings (4pm to 11pm Pakistan time, GitHub can be a few minutes late). When a new NAV appears it saves it and ntfy sends: "New NAV is in" with the price, your value and the day change. Tapping the notification opens your page.
+5. Test the phone side: in ntfy open your topic > menu > Send test notification.
+
+C. Android app
+1. Add file > Create new file. Name: .github/workflows/apk.yml  Paste the text of apk.yml. Commit.
+2. Actions > Build APK > Run workflow. Wait 5 to 10 minutes. Download my-wealth-apk from the finished run, unzip, install app-debug.apk. Uninstall any older version first.
 
 Updating later
-- To change the page: Add file > Upload files, upload the new index.html (same name replaces it). The installed app shows it on next open. No rebuild needed.
-- To change the icon or status bar color: upload the new files, then Actions > Build APK > Run workflow, and install the new APK. Uninstall the old app first, because each build is signed with a different debug key.
+- New page: upload index.html (same name replaces it). The app shows it on next open.
+- New icon or status bar: upload files, edit apk.yml with the pencil, run Build APK, reinstall.
+- If Update NAV prints "price not found", Al Meezan changed its site. Tell Claude.
+
+What is in the app (Nivo 2.0)
+- Home: portfolio value, scrubbable chart, latest price and refresh, highlights.
+- Insights: performance by period, win rate, streak, volatility, drawdown, daily profit and loss, compare Meezan funds, fund facts.
+- Plan: goal ring, projection chart, SIP needed to hit your goal, plan checklist.
+- History: all prices (edit or delete), investments, backup, restore, CSV.
+- Plus button: add a price or an investment. Gear: theme and refresh.

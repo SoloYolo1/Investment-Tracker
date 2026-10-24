@@ -1,4 +1,4 @@
-import html,json,re,urllib.request
+import html,json,os,re,urllib.request
 URL="https://www.almeezangroup.com/"
 MO={m:i for i,m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(),1)}
 PAT=re.compile(r"Meezan Balanced Fund Offer Price \(Rs\.\) ([\d,.]+) Redemption Price \(Rs\.\) ([\d,.]+) NAV \(Rs\.\) ([\d,.]+) Launch Date \d{1,2} \w{3} \d{4} Validity Date (\d{1,2}) (\w{3}) (\d{4})")
@@ -11,6 +11,23 @@ def parse(raw):
     price=float(red.replace(",",""))or float(nav.replace(",",""))
     if not price or mon not in MO:return None
     return "%s-%02d-%02d"%(y,MO[mon],int(d)),price
+def notify(date,price,data):
+    topic=os.environ.get("NTFY_TOPIC")
+    if not topic:return
+    prev=[x for x in data["navs"] if x["date"]<date]
+    units=sum(b["units"] for b in data.get("buys",[]) if b["date"]<=date)
+    msg="NAV %.4f"%price
+    if prev:msg+=" (%+.2f%% vs %s)"%((price/prev[-1]["nav"]-1)*100,prev[-1]["date"])
+    if units:
+        msg+=". Your value Rs %s"%format(round(units*price),",")
+        if prev:msg+=", day change Rs %s"%format(round(units*(price-prev[-1]["nav"])),"+,")
+    h={"Title":"New NAV is in","Priority":"default"}
+    if os.environ.get("PAGE_URL"):h["Click"]=os.environ["PAGE_URL"]
+    try:
+        urllib.request.urlopen(urllib.request.Request("https://ntfy.sh/"+topic,data=msg.encode("utf-8"),headers=h,method="POST"),timeout=20)
+        print("notified")
+    except Exception as e:
+        print("notify failed:",e)
 def main():
     try:
         req=urllib.request.Request(URL,headers={"User-Agent":"Mozilla/5.0 (compatible; NAVTracker/1.0)"})
@@ -29,4 +46,5 @@ def main():
     data["navs"]=sorted(rows.values(),key=lambda x:x["date"])
     json.dump(data,open("data.json","w"),indent=1)
     print("updated",date,price)
+    notify(date,price,data)
 if __name__=="__main__":main()
